@@ -5,13 +5,34 @@
 <title>Memoria Fidei</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="https://brunoandremattos.github.io/memoria-fidei/">
-<meta http-equiv="refresh" content="0; url=https://brunoandremattos.github.io/memoria-fidei/#ordens">
-<script>location.replace("https://brunoandremattos.github.io/memoria-fidei/" + (location.hash || "#ordens"));</script>
+<link rel="canonical" href="https://memoria-fidei.pages.dev/">
+<noscript><meta http-equiv="refresh" content="0; url=https://memoria-fidei.pages.dev/"></noscript>
+<script>
+// O site mudou de endereço. Leva junto o progresso salvo neste navegador (chaves mf-* e ordens-*),
+// no # da URL, que não é enviado a nenhum servidor. O site novo grava esses dados uma vez.
+(function () {
+  var NEW = "https://memoria-fidei.pages.dev/";
+  var deck = location.hash.slice(1).split("&")[0].replace(/[^\w-]/g, "") || "ordens";
+  var data = {}, n = 0;
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (/^(mf|ordens)-[\w-]+$/.test(k)) { data[k] = localStorage.getItem(k); n++; }
+    }
+  } catch (e) { }
+  var h = deck;
+  if (n) {
+    var bytes = new TextEncoder().encode(JSON.stringify(data)), bin = "";
+    for (var j = 0; j < bytes.length; j++) bin += String.fromCharCode(bytes[j]);
+    h += "&import=" + btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  location.replace(NEW + (h ? "#" + h : ""));
+})();
+</script>
 <style>body{font:16px system-ui,sans-serif;margin:0;padding:48px 16px;text-align:center;background:#ECEEF3;color:#1B2233}a{color:#23407A}@media (prefers-color-scheme:dark){body{background:#0F1420;color:#E7EAF1}a{color:#93B0EA}}</style>
 </head>
 <body>
-<p>Este site agora se chama <b>Memoria Fidei</b> e mudou de endereço.<br>This site is now called <b>Memoria Fidei</b> and has moved.</p>
-<p><a href="https://brunoandremattos.github.io/memoria-fidei/#ordens">brunoandremattos.github.io/memoria-fidei</a></p>
+<p>Memoria Fidei mudou de endereço.<br>Memoria Fidei has moved.</p>
+<p><a href="https://memoria-fidei.pages.dev/">memoria-fidei.pages.dev</a></p>
 </body>
 </html>
